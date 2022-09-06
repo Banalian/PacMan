@@ -95,6 +95,10 @@ PrefabInstance:
       propertyPath: initialDirection.x
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 7611053812899657125, guid: c7fcebc2c7d6c474cb4d5aae2eb1bf1a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7fcebc2c7d6c474cb4d5aae2eb1bf1a, type: 3}
 --- !u!114 &4341612257724493369 stripped
