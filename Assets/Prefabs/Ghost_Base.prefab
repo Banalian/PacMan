@@ -216,6 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4058719449698573794}
   - component: {fileID: 1812705117448807278}
+  - component: {fileID: 8604610054778183529}
   m_Layer: 7
   m_Name: Eyes
   m_TagString: Untagged
@@ -290,6 +291,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8604610054778183529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3379940458394266554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b86c9a778b987f34995c145195a256f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: {fileID: 21300000, guid: 7391304e6dcdc594484288107bfd217f, type: 3}
+  down: {fileID: 21300000, guid: b97167c35748db84fb4d32f4f242922a, type: 3}
+  left: {fileID: 21300000, guid: d65aa956b7569874fab274083826a77f, type: 3}
+  right: {fileID: 21300000, guid: 07ddb51374d9f19458dad756bbbcd880, type: 3}
 --- !u!1 &4449754669972815502
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +426,7 @@ GameObject:
   - component: {fileID: 2355582378888339083}
   - component: {fileID: 2078491898436114090}
   - component: {fileID: 7611053812899657125}
+  - component: {fileID: 6218125571426828358}
   m_Layer: 7
   m_Name: Ghost_Base
   m_TagString: Untagged
@@ -518,6 +536,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 8
+  body: {fileID: 6696233205362093855}
+  eyes: {fileID: 1812705117448807278}
+  blue: {fileID: 7411770561871482849}
+  white: {fileID: 3836705219282716346}
 --- !u!114 &2355582378888339083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,3 +581,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 20
+--- !u!212 &6218125571426828358
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6801293256685847958}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
