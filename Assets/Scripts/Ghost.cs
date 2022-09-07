@@ -57,6 +57,8 @@ public class Ghost : MonoBehaviour
             }
             else
             {
+                this.chase.Disable();
+                this.scatter.Enable();
                 FindObjectOfType<GameManager>().PacManEaten();
             }
         }
