@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     public Ghost[] ghosts;
     public Pacman pacMan;
     public Transform pellets;
-    public Fruit fruit;
+    public FruitSpawner fruitSpawner;
 
     public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         }
 
         this.pacMan.ResetState();
-        this.fruit.ResetState();
+        this.fruitSpawner.ResetState();
     }
 
     private void GameOver()
@@ -100,8 +100,7 @@ public class GameManager : MonoBehaviour
     public void FruitEaten(Fruit fruit)
     {
         SetScore(this.score + fruit.points);
-        fruit.gameObject.SetActive(false);
-        
+        fruitSpawner.NewFruit();
     }
 
     public void PacManEaten()
