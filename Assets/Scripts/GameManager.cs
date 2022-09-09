@@ -32,18 +32,15 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (this.lives <=0 && Input.anyKeyDown)
-        {
-            NewGame();
-        }
+        
     }
 
-    private void NewGame()
+    public void NewGame()
     {
         SetScore(0);
         SetLives(3);
         NewRound();
-        
+        FindObjectOfType<EndUI>().GetComponent<UIDocument>().rootVisualElement.visible = false;
     }
 
     private void NewRound()
@@ -74,8 +71,9 @@ public class GameManager : MonoBehaviour
         {
             this.ghosts[i].gameObject.SetActive(false);
         }
-
+        
         this.pacMan.gameObject.SetActive(false);
+        FindObjectOfType<EndUI>().GetComponent<UIDocument>().rootVisualElement.visible = true;
     }
 
     private void SetScore(int score)
