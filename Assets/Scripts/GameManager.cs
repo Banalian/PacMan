@@ -1,3 +1,5 @@
+
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,14 +9,19 @@ public class GameManager : MonoBehaviour
     public Pacman pacMan;
     public Transform pellets;
     public FruitSpawner fruitSpawner;
-
+    public float[] speedModifierByRoundPacman;
+    public float[] speedModifierByRoundPacmanPellet;
+    public float[] speedModifierByRoundGhost;
+    public int[] bonusPointByRound;
     public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
     public int lives { get; private set; }
+    public int nbRounds { get; private set; } = -1;
 
 
     private Label scoreLabel;
     private Label livesLabel;
+    private Label roundLabel;
 
     public void OnEnable()
     {
@@ -22,17 +29,13 @@ public class GameManager : MonoBehaviour
 
         scoreLabel = document.Q<Label>("Score");
         livesLabel = document.Q<Label>("Lives");
+        roundLabel = document.Q<Label>("Round");
     }
 
 
     private void Start()
     {
         NewGame();
-    }
-
-    private void Update()
-    {
-        
     }
 
     public void NewGame()
@@ -45,12 +48,27 @@ public class GameManager : MonoBehaviour
 
     private void NewRound()
     {
+        this.nbRounds++;
+        this.roundLabel.text = $"Round : {this.nbRounds + 1}";
+        SetScore(this.score + 
+                 (this.nbRounds > this.bonusPointByRound.Length
+                    ? this.bonusPointByRound.Last()
+                    : this.bonusPointByRound[this.nbRounds]));
         foreach (Transform pellet in this.pellets)
         {
             pellet.gameObject.SetActive(true);
         }
 
         ResetState();
+        //Modify the speed of the pacman and ghost
+        SetPacmanSpeed();
+        for(int i = 0; i < this.ghosts.Length; i++)
+        {
+            this.ghosts[i].movement.speedMultiplier = this.nbRounds > this.speedModifierByRoundGhost.Length
+                        ? this.speedModifierByRoundGhost.Last()
+                        : this.speedModifierByRoundGhost[this.nbRounds];
+        }
+        
     }
 
     private void ResetState()
@@ -127,6 +145,16 @@ public class GameManager : MonoBehaviour
             this.pacMan.gameObject.SetActive(false);
             Invoke(nameof(NewRound), 3.0f);
         }
+        else
+        {
+            this.pacMan.Movement.speedMultiplier = this.nbRounds > this.speedModifierByRoundPacmanPellet.Length
+                ? this.speedModifierByRoundPacmanPellet.Last()
+                : this.speedModifierByRoundPacmanPellet[this.nbRounds];
+            CancelInvoke(nameof(SetPacmanSpeed));
+            Invoke(nameof(SetPacmanSpeed), 0.5f);
+        }
+        
+        
     }
 
     public void PowerPelletEaten(PowerPellet powerPellet)
@@ -139,7 +167,7 @@ public class GameManager : MonoBehaviour
 
         PelletEaten(powerPellet);
 
-        CancelInvoke();
+        CancelInvoke(nameof(ResetGhostMultiplier));
         Invoke(nameof(ResetGhostMultiplier), powerPellet.duration);
     }
 
@@ -159,5 +187,12 @@ public class GameManager : MonoBehaviour
     private void ResetGhostMultiplier()
     {
         this.ghostMultiplier = 1;
+    }
+
+    private void SetPacmanSpeed()
+    {
+        this.pacMan.Movement.speedMultiplier = this.nbRounds > this.speedModifierByRoundPacman.Length
+            ? this.speedModifierByRoundPacman.Last()
+            : this.speedModifierByRoundPacman[this.nbRounds];
     }
 }

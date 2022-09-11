@@ -8,7 +8,7 @@ public class GhostFrightened : GhostBehavior
     public SpriteRenderer white;
 
     public bool eaten { get; private set; }
-
+    private float oldSpeedGhost;
     public override void Enable(float duration)
     {
         base.Enable(duration);
@@ -47,7 +47,6 @@ public class GhostFrightened : GhostBehavior
     {
         this.eaten = true;
 
-        //TODO : Actually move to home instead of TP
         Vector3 position = this.ghost.home.inside.position;
         position.z = this.ghost.transform.position.z;
         this.ghost.transform.position = position;
@@ -62,13 +61,14 @@ public class GhostFrightened : GhostBehavior
 
     private void OnEnable()
     {
+        this.oldSpeedGhost = this.ghost.movement.speedMultiplier;
         this.ghost.movement.speedMultiplier = 0.5f;
         this.eaten = false;
     }
 
     private void OnDisable()
     {
-        this.ghost.movement.speedMultiplier = 1f;
+        this.ghost.movement.speedMultiplier = this.oldSpeedGhost;
         this.eaten = false;
     }
 
