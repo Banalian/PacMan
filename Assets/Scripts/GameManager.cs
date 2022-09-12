@@ -5,6 +5,9 @@ using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
+
+    public GameObject floatingTextPrefab;
+    
     public Ghost[] ghosts;
     public Pacman pacMan;
     public Transform pellets;
@@ -12,7 +15,6 @@ public class GameManager : MonoBehaviour
     public float[] speedModifierByRoundPacman;
     public float[] speedModifierByRoundPacmanPellet;
     public float[] speedModifierByRoundGhost;
-    public int[] bonusPointByRound;
     public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
     public int lives { get; private set; }
@@ -50,10 +52,7 @@ public class GameManager : MonoBehaviour
     {
         this.nbRounds++;
         this.roundLabel.text = $"Round : {this.nbRounds + 1}";
-        SetScore(this.score + 
-                 (this.nbRounds > this.bonusPointByRound.Length
-                    ? this.bonusPointByRound.Last()
-                    : this.bonusPointByRound[this.nbRounds]));
+
         foreach (Transform pellet in this.pellets)
         {
             pellet.gameObject.SetActive(true);
@@ -110,12 +109,14 @@ public class GameManager : MonoBehaviour
     {
         int points = ghost.points * ghostMultiplier;
         SetScore(this.score + points);
+        ShowFloatingText(ghost.transform, points.ToString());
         this.ghostMultiplier++;
     }
 
     public void FruitEaten(Fruit fruit)
     {
         SetScore(this.score + fruit.points);
+        ShowFloatingText(fruit.transform, fruit.points.ToString());
         fruitSpawner.NewFruit();
     }
 
@@ -194,5 +195,14 @@ public class GameManager : MonoBehaviour
         this.pacMan.Movement.speedMultiplier = this.nbRounds > this.speedModifierByRoundPacman.Length
             ? this.speedModifierByRoundPacman.Last()
             : this.speedModifierByRoundPacman[this.nbRounds];
+    }
+
+
+    private void ShowFloatingText(Transform position, string text)
+    {
+        {
+            GameObject floatingText = Instantiate(this.floatingTextPrefab, position.position, Quaternion.identity);
+            floatingText.GetComponentInChildren<TextMesh>().text = text;
+        }
     }
 }

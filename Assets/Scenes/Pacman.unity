@@ -4132,6 +4132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc3af4e83659954da932800c41b98c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floatingTextPrefab: {fileID: 2150000397470266605, guid: 4d53825b00a150546a6a075614cbe5cc, type: 3}
   ghosts:
   - {fileID: 277334745}
   - {fileID: 629398467}
@@ -4206,6 +4207,7 @@ MonoBehaviour:
   - 0.95
   - 0.95
   - 0.95
+  bonusPointByRound: 
 --- !u!4 &1226398606
 Transform:
   m_ObjectHideFlags: 0
